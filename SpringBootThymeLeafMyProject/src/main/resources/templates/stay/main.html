@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- ****** Archive Area Start ****** -->
+    <section class="archive-area section_padding_80">
+        <div class="container">
+            <div class="row">
+
+                <!-- Single Post -->
+                <div class="col-12 col-md-6 col-lg-4" th:each="vo,i:${list}">
+                    <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
+                        <!-- Post Thumb -->
+                        <div class="post-thumb">
+                            <img th:src="${iList[i.index].mainimage}" alt="">
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <div class="post-meta d-flex">
+                                <div class="post-author-date-area d-flex">
+                                    <!-- Post Author -->
+                                    <div class="post-author">
+                                        <a href="#" th:text="${vo.stype}"></a>
+                                    </div>
+                                    <!-- Post Date -->
+                                    <div class="post-date">
+                                        <a href="#" th:text="${vo.address}"></a>
+                                    </div>
+                                </div>
+                                <!-- Post Comment & Share Area -->
+                                <div class="post-comment-share-area d-flex">
+                                    <!-- Post Favourite -->
+                                    <div class="post-favourite">
+                                        <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 10</a>
+                                    </div>
+                                    <!-- Post Comments -->
+                                    <div class="post-comments">
+                                        <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 12</a>
+                                    </div>
+                                    <!-- Post Share -->
+                                    <div class="post-share">
+                                        <a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a th:href="@{/stay/before(stay_no=${vo.stay_no})}">
+                                <h4 class="post-headline" th:text="${vo.sname}"></h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <div class="pagination-area d-sm-flex mt-15">
+                        <nav aria-label="#">
+                            <ul class="pagination" style="margin-left: 300px;">
+                                <li th:if="${startPage>1}">
+                                    <a class="page-link" th:href="@{/stay/main(page=${startPage-1})}"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Previous</a>
+                                </li>
+                                <li th:class="${curpage==i?'page-item active':'page-item'}" th:each="i:${#numbers.sequence(startPage,endPage)}">
+                                	<a th:href="@{/stay/main(page=${i})}" th:text="${i}" class="page-link"></a>
+                                </li>
+                                <li th:if="${endPage<totalpage}">
+                                    <a class="page-link" th:href="@{/stay/main(page=${endPage+1})}">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- 
+                        <nav class="pagination">
+					        <ul>
+					          <li th:if="${startPage>1}"><a th:href="@{/recipe/main(page=${startPage-1})}">&laquo; Previous</a></li>
+					          <li th:class="${curpage==i?'current':''}" th:each="i:${#numbers.sequence(startPage,endPage)}">
+					            <a th:href="@{/recipe/main(page=${i})}" th:text="${i}"></a>
+					          </li>
+					          <li th:if="${endPage<totalpage}"><a th:href="@{/recipe/main(page=${endPage+1})}">Next &raquo;</a></li>
+					        </ul>
+					      </nav>
+                         -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ****** Archive Area End ****** -->
+</body>
+</html>
